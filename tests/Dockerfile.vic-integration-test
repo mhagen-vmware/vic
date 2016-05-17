@@ -1,0 +1,15 @@
+# VIC Test Image
+#
+# Build a docker image that runs latest Ubuntu with golang, robotframework and vmware-vic installed
+# (https://golang.org/)
+# (http://robotframework.org/)
+# (https://github.com/vmware/vic)
+#
+# docker build -t vic-integration-test --no-cache -f Dockerfile.vic-integration-test .
+
+from vic-integration-test-base
+
+# Install latest version of vmware-vic
+run go get github.com/vmware/vic; echo 0
+run make -C /src/github.com/vmware/vic all
+env PATH $PATH:/src/github.com/vmware/vic/bin
